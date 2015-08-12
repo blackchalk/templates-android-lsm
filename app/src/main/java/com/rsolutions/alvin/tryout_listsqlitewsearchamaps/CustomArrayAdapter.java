@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class CustomArrayAdapter extends ArrayAdapter<String>{
     Context context;
     ArrayList<String> arrayList;
+
     private LayoutInflater inflater;
 
     public CustomArrayAdapter(Activity context, ArrayList<String> arrayList) {
@@ -31,12 +32,22 @@ public class CustomArrayAdapter extends ArrayAdapter<String>{
     @SuppressWarnings("rawtypes")
     @Override
     public View getView(final int position,View convertView, ViewGroup parent) {
+        ViewHolder holder = new ViewHolder();
         convertView = inflater.inflate(R.layout.single_item, null);
-        TextView tv= (TextView)convertView.findViewById(R.id.tv);
-        ImageView img = (ImageView)convertView.findViewById(R.id.imageView1);
-        tv.setText(arrayList.get(position));
-        img.setImageResource(R.drawable.abc_btn_rating_star_off_mtrl_alpha);
+        holder.tv= (TextView)convertView.findViewById(R.id.tv);
+        holder.img = (ImageView)convertView.findViewById(R.id.imageView1);
+        holder.tv.setText(arrayList.get(position));
+        holder.img.setImageResource(R.drawable.abc_list_divider_mtrl_alpha);
+        convertView.setTag(holder);
         return convertView;
+
+    }
+    static class ViewHolder{
+        TextView tv;
+        ImageView img;
+//        ImageView icon;
+//          ProgressBar progressBar;
+//        int position;
 
     }
 }

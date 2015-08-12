@@ -22,30 +22,32 @@ protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         editsearch = (EditText)findViewById(R.id.editText1);
-        listView = (ListView)findViewById(R.id.listView);
+        listView = (ListView)findViewById(R.id.listview1);
 
         mItems = new ArrayList<>();
-        mItems.add("Diary of a Wimpy Kid 6: Cabin Fever");
-        mItems.add("Steve Jobs");
-        mItems.add("Inheritance (The Inheritance Cycle)");
-        mItems.add("11/22/63: A Novel");
-        mItems.add("The Hunger Games");
-        mItems.add("The LEGO Ideas Book");
-        mItems.add("Explosive Eighteen: A Stephanie Plum Novel");
-        mItems.add("Catching Fire (The Second Book of the Hunger Games)");
-        mItems.add("Elder Scrolls V: Skyrim: Prima Official Game Guide");
-        mItems.add("Death Comes to Pemberley");
-        mItems.add("Diary of a Wimpy Kid 6: Cabin Fever");
-        mItems.add("Steve Jobs");
-        mItems.add("Inheritance (The Inheritance Cycle)");
-        mItems.add("11/22/63: A Novel");
-        mItems.add("The Hunger Games");
-        mItems.add("The LEGO Ideas Book");
-        mItems.add("Explosive Eighteen: A Stephanie Plum Novel");
-        mItems.add("Catching Fire (The Second Book of the Hunger Games)");
-        mItems.add("Elder Scrolls V: Skyrim: Prima Official Game Guide");
-        mItems.add("Death Comes to Pemberley");
+        mItems.add("Marikina City");
+        mItems.add("Ortigas Center, Pasig City");
+        mItems.add("Roxas Boulevard");
+        mItems.add("Cubao");
+        mItems.add("parañaque");
+        mItems.add("Bohol");
+        mItems.add("Nueva Ecija");
+        mItems.add("Rizal");
+//        mItems.add("Elder Scrolls V: Skyrim: Prima Official Game Guide");
+//        mItems.add("Death Comes to Pemberley");
+//        mItems.add("Diary of a Wimpy Kid 6: Cabin Fever");
+//        mItems.add("Steve Jobs");
+//        mItems.add("Inheritance (The Inheritance Cycle)");
+//        mItems.add("11/22/63: A Novel");
+//        mItems.add("The Hunger Games");
+//        mItems.add("The LEGO Ideas Book");
+//        mItems.add("Explosive Eighteen: A Stephanie Plum Novel");
+//        mItems.add("Catching Fire (The Second Book of the Hunger Games)");
+//        mItems.add("Elder Scrolls V: Skyrim: Prima Official Game Guide");
+//        mItems.add("Death Comes to Pemberley");
 
         listView.setAdapter(new CustomArrayAdapter(MainActivity.this, mItems));
 
@@ -56,7 +58,8 @@ public void onItemClick(AdapterView<?> parent, View view,
         int position, long id) {
 
         Intent intent = new Intent(MainActivity.this, SubActivity.class);
-        intent.putExtra("thanhcs",mItems.get(position));
+        intent.putExtra("intentposition",mItems.get(position));
+        //TODO somewhere here you need to pass the position from db/etc of the item??
         startActivity(intent); //when you click,
 
         //open new activity and intent text

@@ -3,6 +3,9 @@ package com.rsolutions.alvin.tryout_listsqlitewsearchamaps;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -10,7 +13,9 @@ import android.widget.TextView;
  */
 public class SubActivity extends Activity{
 
-    TextView tv;
+    TextView tv,tv2;
+    ImageView img;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +24,26 @@ public class SubActivity extends Activity{
         super.onCreate(savedInstanceState);
         tv =(TextView)findViewById(R.id.tv);
         Intent intent = getIntent();
-        String text = intent.getExtras().getString("thanhcs");
+        final String text = intent.getExtras().getString("intentposition");
         tv.setText(""+text);
+        tv2.setText("subactivity");
+        img = (ImageView)findViewById(R.id.imageView1);
+
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.imageView1:
+                        //TODO open intent and activity here.
+                        // and redirect to a mapactivity
+                        //search for a match for text in database and
+                        // get latitude longitude via persistent data
+                        //load map on next activity
+                        Log.v("IMAGE CLICKED", "CLICKED " + v.getId() + " " + text);
+                        break;
+                }
+            }
+        });
     }
 }
 

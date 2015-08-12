@@ -9,20 +9,35 @@
         android:id="@+id/tv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/imageView1"
         android:text="TextView"
-        android:paddingTop="10sp"
-        android:paddingLeft="5sp"
-        android:textSize="18sp" />
+        style="@style/Base.TextAppearance.AppCompat.Headline"
+        android:padding="8sp"
+       />
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:clickable="true"
+        android:onClick="view map"
+        android:src="@drawable/abc_ic_menu_share_mtrl_alpha"
+        android:layout_marginRight="26dp"
+        android:layout_marginEnd="26dp"
         android:layout_alignParentTop="true"
-        android:src="@drawable/abc_ic_menu_share_mtrl_alpha" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tv2"
+        android:layout_below="@id/tv"
+        android:textSize="14dp"
+        style="@style/Base.TextAppearance.AppCompat.Headline"
+        android:layout_marginLeft="20dp"
+        android:background="@color/hint_foreground_material_dark"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
