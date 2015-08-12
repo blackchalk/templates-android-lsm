@@ -20,7 +20,7 @@
         android:layout_height="48dp"
         android:clickable="true"
         android:onClick="view map"
-        android:src="@drawable/abc_ic_menu_share_mtrl_alpha"
+        android:src="@drawable/abc_btn_radio_to_on_mtrl_015"
         android:layout_marginRight="26dp"
         android:layout_marginEnd="26dp"
         android:layout_alignParentTop="true"
@@ -39,5 +39,17 @@
         android:background="@color/hint_foreground_material_dark"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        style="@style/Base.TextAppearance.AppCompat.Headline"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView5"
+        android:textSize="14dp"
+        android:background="@color/hint_foreground_material_dark"
+        android:layout_below="@+id/tv2"
+        android:layout_alignLeft="@+id/tv2"
+        android:layout_alignStart="@+id/tv2" />
 
 </RelativeLayout>

@@ -1,95 +1,99 @@
 package com.rsolutions.alvin.tryout_listsqlitewsearchamaps;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+//TODO working as of:{@link:aug112015}
 
-public class MainActivity extends Activity{
+public class MainActivity extends AppCompatActivity implements android.view.View.OnClickListener{
+
     EditText editsearch;
-ListView listView;
-private ArrayList<String> mItems;
+    ListView lv;
+    private ArrayList<String> mItems;
+    Button btnAdd;
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        btnAdd = (Button)findViewById(R.id.btn_id);
+        btnAdd.setOnClickListener(this);
 
         editsearch = (EditText)findViewById(R.id.editText1);
-        listView = (ListView)findViewById(R.id.listview1);
+        lv = (ListView)findViewById(R.id.listview);
 
         mItems = new ArrayList<>();
         mItems.add("Marikina City");
-        mItems.add("Ortigas Center, Pasig City");
+        mItems.add("Pasig City");
         mItems.add("Roxas Boulevard");
         mItems.add("Cubao");
-        mItems.add("parañaque");
-        mItems.add("Bohol");
-        mItems.add("Nueva Ecija");
         mItems.add("Rizal");
-//        mItems.add("Elder Scrolls V: Skyrim: Prima Official Game Guide");
-//        mItems.add("Death Comes to Pemberley");
-//        mItems.add("Diary of a Wimpy Kid 6: Cabin Fever");
-//        mItems.add("Steve Jobs");
-//        mItems.add("Inheritance (The Inheritance Cycle)");
-//        mItems.add("11/22/63: A Novel");
-//        mItems.add("The Hunger Games");
-//        mItems.add("The LEGO Ideas Book");
-//        mItems.add("Explosive Eighteen: A Stephanie Plum Novel");
-//        mItems.add("Catching Fire (The Second Book of the Hunger Games)");
-//        mItems.add("Elder Scrolls V: Skyrim: Prima Official Game Guide");
-//        mItems.add("Death Comes to Pemberley");
+        mItems.add("Quezon City");
+        mItems.add("Manila");
+        mItems.add("Angeles City");
+        mItems.add("Paranaque City");
 
-        listView.setAdapter(new CustomArrayAdapter(MainActivity.this, mItems));
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
+        lv.setAdapter(new CustomArrayAdapter(MainActivity.this, mItems));
 
-@Override
-public void onItemClick(AdapterView<?> parent, View view,
-        int position, long id) {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
 
-        Intent intent = new Intent(MainActivity.this, SubActivity.class);
-        intent.putExtra("intentposition",mItems.get(position));
-        //TODO somewhere here you need to pass the position from db/etc of the item??
-        startActivity(intent); //when you click,
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        //open new activity and intent text
-        }
+            Intent intent = new Intent(MainActivity.this, SubActivity.class);
+            intent.putExtra("intentposition",mItems.get(position));
+            //TODO somewhere here you need to pass the position from db
+            startActivity(intent);
+            //open new activity and intent text
+            }
 
 
         });
 
 
+
         editsearch.addTextChangedListener(new TextWatcher() { //edit search
-//Event when changed word on EditTex
-@Override
-public void onTextChanged(CharSequence s, int start, int before, int count) {
-        ArrayList<String> temp = new ArrayList<String>();
+        //Event when changed word on EditTex
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        final ArrayList<String> temp = new ArrayList<String>();
         int textlength = editsearch.getText().length();
         temp.clear();
         for (int i = 0; i < mItems.size(); i++)
         {
         if (textlength <= mItems.get(i).length())
-        {
-        if(editsearch.getText().toString().equalsIgnoreCase(
-        (String)
-        mItems.get(i).subSequence(0,
-        textlength)))
-        {
-        temp.add(mItems.get(i));
+            {
+            if(editsearch.getText().toString().equalsIgnoreCase((String) mItems.get(i).subSequence(0, textlength)))
+                {
+                temp.add(mItems.get(i));
+                }
+            }
         }
-        }
-        }
-        listView.setAdapter(new CustomArrayAdapter(MainActivity.this, temp));
+        lv.setAdapter(new CustomArrayAdapter(MainActivity.this, temp));
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(MainActivity.this, SubActivity.class);
+                    intent.putExtra("intentposition", temp.get(position));
+                    //TODO somewhere here you need to pass the position from db
+                    startActivity(intent);
+                    //open new activity and intent text
+
+                }
+            });
         }
 
 
@@ -116,5 +120,16 @@ public boolean onCreateOptionsMenu(Menu menu) {
         return true;
         }
 
+    @Override
+    public void onClick(View v) {
+        if(v==findViewById(R.id.btn_id)){
+            //add button intent service
+            Intent intent = new Intent(this,PlaceInfo.class);
+            intent.putExtra("addintent", 0);
+            startActivity(intent);
+
         }
+
+    }
+}
 

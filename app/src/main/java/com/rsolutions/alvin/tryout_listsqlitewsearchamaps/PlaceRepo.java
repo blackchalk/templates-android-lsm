@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,10 @@ public class PlaceRepo {
     private DatabaseHelper dbHelper;
     private Context context;
 
+
+    public PlaceRepo(Context context) {
+        dbHelper = new DatabaseHelper(context);
+    }
     //inserts a place
     public int insert(Place place){
         //Open connection to write data
@@ -34,7 +39,7 @@ public class PlaceRepo {
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         // It's a good practice to use parameter ?, instead of concatenate string
-        db.delete(Place.TABLE, Place.KEY_ID + "= ?", new String[] { String.valueOf(place_Id) });
+        db.delete(Place.TABLE, Place.KEY_ID + "= ?", new String[]{String.valueOf(place_Id)});
         db.close(); // Closing database connection
     }
     public void update(Place place) {
@@ -74,10 +79,12 @@ public class PlaceRepo {
                 HashMap<String, String> placehashmap = new HashMap<>();//create hashmap
                 placehashmap.put("id", cursor.getString(cursor.getColumnIndex(Place.KEY_ID)));
                 placehashmap.put("name", cursor.getString(cursor.getColumnIndex(Place.KEY_name)));
-//                placehashmap.put("lat",cursor.getString(cursor.getColumnIndex(Place.KEY_lat)));
+                placehashmap.put("desc", cursor.getString(cursor.getColumnIndex(Place.KEY_desc)));
+                placehashmap.put("lat",cursor.getString(cursor.getColumnIndex(Place.KEY_lat)));
+                placehashmap.put("lon",cursor.getString(cursor.getColumnIndex(Place.KEY_lon)));
 //TODO so this arraylist will populate our listview with id(hidden from the view actually)& names ..have you consider adding other collumnindex?
 
-                placeList.add(placehashmap);//arraylist
+                placeList.add(placehashmap);//add()method,adding subsequent hashmap put()method to arraylist
 
             } while (cursor.moveToNext());
         }
@@ -119,9 +126,46 @@ public class PlaceRepo {
         db.close();
         return place;
     }
+    public Place getPlacebyName(String title) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery = "SELECT  " +
+                Place.KEY_ID + "," +
+                Place.KEY_name + "," +
+                Place.KEY_desc + "," +
+                Place.KEY_lat + "," +
+                Place.KEY_lon +
+                " FROM " + Place.TABLE
+                + " WHERE " +
+                Place.KEY_name + "=?";// It's a good practice to use parameter ?, instead of concatenate string
+
+        Place place = new Place();
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{title});
+        if (cursor.moveToFirst()) {
+            HashMap<String,String>hashlist=new HashMap<>();
+            hashlist.put("name",cursor.getString(cursor.getColumnIndex(Place.KEY_name)));
+            hashlist.put("desc",cursor.getString(cursor.getColumnIndex(Place.KEY_desc)));
+            hashlist.put("lat",cursor.getString(cursor.getColumnIndex(Place.KEY_lat)));
+            hashlist.put("lon",cursor.getString(cursor.getColumnIndex(Place.KEY_lon)));
+//            place.name= cursor.getString(cursor.getColumnIndex(Place.KEY_name));
+//            place.desc= cursor.getString(cursor.getColumnIndex(Place.KEY_desc));
+//            place.lat=cursor.getDouble(cursor.getColumnIndex(Place.KEY_lat));
+//            place.lon=cursor.getDouble(cursor.getColumnIndex(Place.KEY_lon));
+
+            Log.v("cursor", "" + cursor.getCount());
+            Log.v("HASH"," "+ hashlist.get("lat")+"/n"+hashlist.get("lon"));
+            place.name=hashlist.get("name");
+            place.desc=hashlist.get("desc");
+            place.lat=Double.parseDouble(hashlist.get("lat"));
+            place.lon=Double.parseDouble(hashlist.get("lon"));
+        }while (cursor.moveToNext())
+
+        cursor.close();
+        db.close();
+        return place;
 
 
-
+    }
 
 
 }

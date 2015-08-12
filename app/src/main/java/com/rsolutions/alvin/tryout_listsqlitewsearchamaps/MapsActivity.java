@@ -1,14 +1,21 @@
 package com.rsolutions.alvin.tryout_listsqlitewsearchamaps;
 
-import android.support.v4.app.FragmentActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity {
+
+    public static final String sLATITUDE="i_lat";
+    public static final String sLONGITUDE="i_lon";
+    public static final String sNAME="i_name";
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
@@ -16,6 +23,8 @@ public class MapsActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+
         setUpMapIfNeeded();
     }
 
@@ -60,6 +69,31 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        Intent i = getIntent();
+        String name = i.getExtras().getString(sNAME);
+        final double lat = i.getDoubleExtra(sLATITUDE, 0);
+        final double lon= i.getDoubleExtra(sLONGITUDE,0);
+
+
+        gotoLocation(new LatLng(lat,lon),name);
+//        Log.v("MAPSS",""+lat);
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(lat,lon)).title("Target").snippet(name));
+    }
+    public void gotoLocation(LatLng latLng,String locString){
+
+        if(mMap==null)
+            return;
+        //add a marker for the given location
+        MarkerOptions markerOpt = new MarkerOptions()
+                .draggable(false)
+                .flat(false)
+                .position(latLng)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                .title("You choose:")
+                .snippet(locString);
+        //see the onMarkedClicked callback for why we do this
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+        //draw this marker
+        mMap.addMarker(markerOpt);
     }
 }
