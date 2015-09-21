@@ -37,7 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(CREATE_TABLE_PLACE);
 
     }
-           //Update the database by checking version
+    //Update the database by checking version
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed, all data will be gone!!!
@@ -45,8 +45,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         // Create tables again
         onCreate(db);
-
     }
-
 }
 

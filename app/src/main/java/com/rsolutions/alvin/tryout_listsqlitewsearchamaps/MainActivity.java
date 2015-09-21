@@ -17,10 +17,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements android.view.View.OnClickListener{
 
-    EditText editsearch;
-    ListView lv;
+    EditText editsearch;//search
+    ListView lv;//lists
     private ArrayList<String> mItems;
-    Button btnAdd;
+    Button btnAdd;//add button
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
         editsearch = (EditText)findViewById(R.id.editText1);
         lv = (ListView)findViewById(R.id.listview);
-
+        //adding items to list
         mItems = new ArrayList<>();
         mItems.add("Marikina City");
         mItems.add("Pasig City");
@@ -43,10 +43,9 @@ protected void onCreate(Bundle savedInstanceState) {
         mItems.add("Manila");
         mItems.add("Angeles City");
         mItems.add("Paranaque City");
-
-
+        //adapter that will be used by list
         lv.setAdapter(new CustomArrayAdapter(MainActivity.this, mItems));
-
+        //on item click listener
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
 
             @Override
@@ -63,7 +62,7 @@ protected void onCreate(Bundle savedInstanceState) {
         });
 
 
-
+        //editsearch logic
         editsearch.addTextChangedListener(new TextWatcher() { //edit search
         //Event when changed word on EditTex
         @Override

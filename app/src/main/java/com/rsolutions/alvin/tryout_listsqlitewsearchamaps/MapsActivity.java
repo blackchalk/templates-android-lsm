@@ -3,6 +3,7 @@ package com.rsolutions.alvin.tryout_listsqlitewsearchamaps;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -74,7 +75,11 @@ public class MapsActivity extends FragmentActivity {
         final double lat = i.getDoubleExtra(sLATITUDE, 0);
         final double lon= i.getDoubleExtra(sLONGITUDE,0);
 
-
+        //checks if latitude and longitude has value rather than 0
+        if(lat==0.0||lon==0.0){
+        Log.v("#NOVALUE","Latitude or Longitude got no value");
+            gotoLocation(new LatLng(lat, lon), name);
+        }
         gotoLocation(new LatLng(lat,lon),name);
 //        Log.v("MAPSS",""+lat);
 //        mMap.addMarker(new MarkerOptions().position(new LatLng(lat,lon)).title("Target").snippet(name));

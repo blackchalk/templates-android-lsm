@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,7 +81,8 @@ public class PlaceRepo {
                 placehashmap.put("desc", cursor.getString(cursor.getColumnIndex(Place.KEY_desc)));
                 placehashmap.put("lat",cursor.getString(cursor.getColumnIndex(Place.KEY_lat)));
                 placehashmap.put("lon",cursor.getString(cursor.getColumnIndex(Place.KEY_lon)));
-//TODO so this arraylist will populate our listview with id(hidden from the view actually)& names ..have you consider adding other collumnindex?
+//TODO so this arraylist will populate our listview with id(hidden from the view actually)& names
+// TODO..have you consider adding other collumnindex?
 
                 placeList.add(placehashmap);//add()method,adding subsequent hashmap put()method to arraylist
 
@@ -152,8 +152,8 @@ public class PlaceRepo {
 //            place.lat=cursor.getDouble(cursor.getColumnIndex(Place.KEY_lat));
 //            place.lon=cursor.getDouble(cursor.getColumnIndex(Place.KEY_lon));
 
-            Log.v("cursor", "" + cursor.getCount());
-            Log.v("HASH"," "+ hashlist.get("lat")+"/n"+hashlist.get("lon"));
+            // Log.v("cursor", "" + cursor.getCount());
+            // Log.v("HASH"," "+ hashlist.get("lat")+"/n"+hashlist.get("lon"));
             place.name=hashlist.get("name");
             place.desc=hashlist.get("desc");
             place.lat=Double.parseDouble(hashlist.get("lat"));

@@ -9,7 +9,7 @@
         android:id="@+id/tv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="name"
         style="@style/Base.TextAppearance.AppCompat.Headline"
         android:padding="8sp"
        />
@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="lat"
         android:id="@+id/tv2"
         android:layout_below="@id/tv"
         android:textSize="14dp"
@@ -44,7 +44,7 @@
         style="@style/Base.TextAppearance.AppCompat.Headline"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="lon"
         android:id="@+id/textView5"
         android:textSize="14dp"
         android:background="@color/hint_foreground_material_dark"
